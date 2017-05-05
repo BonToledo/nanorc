@@ -6,9 +6,9 @@ syntax "JavaScript" "\.(js)$"
 ## Unused colors: brightred, cyan, green
 
 #### DEFAULT #####
-## Default
-color brightblack,red "^.+$"
-
+color white "^.+$"
+## To help identify lines not covered by this file, uncomment the following.
+## color brightblack,red "^.+$"
 
 #### Symbols - yellow
 ## Variables
