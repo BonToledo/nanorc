@@ -1,0 +1,67 @@
+### all *js files  ( e.g. Firefox user.js, prefs.js )
+syntax "JavaScript" "\.(js)$"
+
+## Based on js.nanorc from https://github.com/scopatz/nanorc
+
+## Unused colors: brightred, cyan, green
+
+#### DEFAULT #####
+## Default
+color brightblack,red "^.+$"
+
+
+#### Symbols - yellow
+## Variables
+color brightyellow "[a-zA-Z_-]+"
+## Object chains
+color yellow "\.[a-zA-Z_-]+"
+## Object members - green
+color brightcyan "[^][}{\)\( ,;:]+:"
+
+
+#### Functions - cyan
+color brightgreen "[a-zA-Z_-]+\("
+
+
+#### Operators - brightwhite
+color white "[][\(\){}<>.,&|!? ;:+*/%=-]"
+
+
+#### Keywords - brightmagenta
+## Stock
+color brightmagenta "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
+color brightmagenta "\<(for|function|if|in|instanceof|NaN|new|null|return)\>"
+color brightmagenta "\<(switch|this|throw|try|typeof|undefined|var|void|while|with)\>"
+## ES6
+color brightmagenta "\<(const|let)\>"
+color brightmagenta "=>"
+## Node/Common
+color magenta "\<(require)\>"
+
+
+#### Literals - white
+## Decimal, cotal and hexadecimal numbers
+color brightwhite "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[0-9a-fA-F]+)([uU][lL]?|[lL][uU]?)?\>"
+## Floating point number with at least one digit before decimal point
+color brightwhite "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
+color brightwhite "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
+## String - Prefer single-quoted.
+color brightwhite "L?'(\'|[^'])*'$"
+color brightwhite "L?'(\'|[^'])*'[^:]"
+color white,blue "L?\"(\\"|[^"])*\""
+## Booleans
+color brightwhite "\<(true|false)\>"
+
+
+#### Comments - brightblack
+## Comments
+color brightblack start="/\*" end="\*/"
+color brightblack "[[:space:]]//.*$"
+color brightblack "^//.*$"
+
+#### Others - TBD
+## Trailing spaces
+color ,green "[[:space:]]+$"
+
+## Escapes
+color red "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
