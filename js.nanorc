@@ -1,67 +1,59 @@
 ### all *js files  ( e.g. Firefox user.js, prefs.js )
 syntax "JavaScript" "\.(js)$"
+## Unused colors: brightred, cyan, green
 
 ## Based on js.nanorc from https://github.com/scopatz/nanorc
 
-## Unused colors: brightred, cyan, green
+## TODO:  Convert this to a series of passes.
 
-#### DEFAULT #####
+##### Pass 0: Default layout.
 color white "^.+$"
 ## To help identify lines not covered by this file, uncomment the following.
-## color brightblack,red "^.+$"
-
-#### Symbols - yellow
-## Variables
-color brightyellow "[a-zA-Z_-]+"
-## Object chains
-color yellow "\.[a-zA-Z_-]+"
-## Object members - green
-color brightcyan "[^][}{\)\( ,;:]+:"
+color brightblack,red "^.+$"
 
 
-#### Functions - cyan
-color brightgreen "[a-zA-Z_-]+\("
+##### Pass 1:  Variables, object chains, and function calls  
+## Variables - brightyellow
+color brightyellow "[$_[:alpha:]][$_[:alnum:]]*"
+## Object chains - yellow
+color yellow "\.[$_[:alpha:]][$_[:alnum:]]*"
+#### Functions - green
+color brightgreen "[$_[:alpha:]][$_[:alnum:]]*\("
 
 
-#### Operators - brightwhite
+##### Pass 2:  Operators, Literals, Keywords, Strings
+## Operators - white
 color white "[][\(\){}<>.,&|!? ;:+*/%=-]"
-
-
-#### Keywords - brightmagenta
-## Stock
+color white " "
+## Decimal, cotal and hexadecimal numbers - brightwhite
+color brightwhite "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[A-Fa-f0-9]+)([uU][lL]?|[lL][uU]?)?\>"
+## Floating point numbers - brightwhite
+color brightwhite "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
+color brightwhite "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
+## Booleans - brightwhite
+color brightwhite "\<(true|false)\>"
+## Keywords - brightmagenta
 color brightmagenta "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
 color brightmagenta "\<(for|function|if|in|instanceof|NaN|new|null|return)\>"
 color brightmagenta "\<(switch|this|throw|try|typeof|undefined|var|void|while|with)\>"
-## ES6
 color brightmagenta "\<(const|let)\>"
 color brightmagenta "=>"
-## Node/Common
-color magenta "\<(require)\>"
+## Object literal members - brightcyan
+color brightcyan "([\"']?)[$_[:alpha:]][$_[:alnum:]]*\1:"
+## Strings - brightwhite
+color brightwhite "'(\'|[^'])*'"
+## Double-quoted strings - white, blue highlight
+color white,blue "\"(\\"|[^"])*\""
 
 
-#### Literals - white
-## Decimal, cotal and hexadecimal numbers
-color brightwhite "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[0-9a-fA-F]+)([uU][lL]?|[lL][uU]?)?\>"
-## Floating point number with at least one digit before decimal point
-color brightwhite "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
-color brightwhite "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
-## String - Prefer single-quoted.
-color brightwhite "L?'(\'|[^'])*'$"
-color brightwhite "L?'(\'|[^'])*'[^:]"
-color white,blue "L?\"(\\"|[^"])*\""
-## Booleans
-color brightwhite "\<(true|false)\>"
-
-
-#### Comments - brightblack
-## Comments
+##### Pass 3:  Comments, trailing spaces, and escapes.
+## Comments - brightblack
 color brightblack start="/\*" end="\*/"
 color brightblack "[[:space:]]//.*$"
 color brightblack "^//.*$"
 
-#### Others - TBD
-## Trailing spaces
+## Trailing spaces - green highlights
 color ,green "[[:space:]]+$"
 
-## Escapes
+## Escapes - red
 color red "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
