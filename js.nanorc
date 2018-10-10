@@ -1,59 +1,58 @@
 ### all *js files  ( e.g. Firefox user.js, prefs.js )
+## New updated taken from http://wiki.linuxhelp.net/index.php/Nano_Syntax_Highlighting
+
 syntax "JavaScript" "\.(js)$"
-## Unused colors: brightred, cyan, green
 
-## Based on js.nanorc from https://github.com/scopatz/nanorc
-
-## TODO:  Convert this to a series of passes.
-
-##### Pass 0: Default layout.
+## Default
 color white "^.+$"
-## To help identify lines not covered by this file, uncomment the following.
-color brightblack,red "^.+$"
 
-
-##### Pass 1:  Variables, object chains, and function calls  
 ## Variables - brightyellow
 color brightyellow "[$_[:alpha:]][$_[:alnum:]]*"
 ## Object chains - yellow
 color yellow "\.[$_[:alpha:]][$_[:alnum:]]*"
-#### Functions - green
+## Functions - green
 color brightgreen "[$_[:alpha:]][$_[:alnum:]]*\("
 
+## Decimal, cotal and hexadecimal numbers
+color brightcyan "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[0-9a-fA-F]+)([uU][lL]?|[lL][uU]?)?\>"
+## Floating point number with at least one digit before decimal point
+color brightcyan "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
+color brightcyan "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
 
-##### Pass 2:  Operators, Literals, Keywords, Strings
 ## Operators - white
 color white "[][\(\){}<>.,&|!? ;:+*/%=-]"
 color white " "
-## Decimal, cotal and hexadecimal numbers - brightwhite
-color brightwhite "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[A-Fa-f0-9]+)([uU][lL]?|[lL][uU]?)?\>"
-## Floating point numbers - brightwhite
-color brightwhite "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
-color brightwhite "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
-## Booleans - brightwhite
-color brightwhite "\<(true|false)\>"
-## Keywords - brightmagenta
-color brightmagenta "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
-color brightmagenta "\<(for|function|if|in|instanceof|NaN|new|null|return)\>"
-color brightmagenta "\<(switch|this|throw|try|typeof|undefined|var|void|while|with)\>"
-color brightmagenta "\<(const|let)\>"
-color brightmagenta "=>"
-## Object literal members - brightcyan
-color brightcyan "([\"']?)[$_[:alpha:]][$_[:alnum:]]*\1:"
-## Strings - brightwhite
-color brightwhite "'(\'|[^'])*'"
-## Double-quoted strings - white, blue highlight
-color white,blue "\"(\\"|[^"])*\""
 
+## Keywords
+color brightmagenta "new [^ ()]*"
+color magenta "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
+color magenta "\<(for|function|if|in|instanceof|new|null|return|switch)\>"
+color magenta "\<(switch|this|throw|try|typeof|undefined|var|void|while|with)\>"
+color magenta "\<(import|as|from|export)\>"
+color magenta "\<(const|let|class|extends|of|get|set|await|async|yield)\>"
 
-##### Pass 3:  Comments, trailing spaces, and escapes.
-## Comments - brightblack
-color brightblack start="/\*" end="\*/"
-color brightblack "[[:space:]]//.*$"
-color brightblack "^//.*$"
+## Type specifiers
+color brightmagenta "class [^ ]*( extends [^ ]*)?"
+color magenta "\<(class|extends)\>"
+color magenta "\<(Array|Boolean|Date|Enumerator|Error|Function|Math)\>"
+color magenta "\<(WeakMap|Map|WeakSet|Set|Symbol|Promise)\>"
+color magenta "\<(Number|Object|RegExp|String)\>"
+color magenta "\<(true|false)\>"
+color magenta "=>"
+color brightmagenta "this"
 
-## Trailing spaces - green highlights
-color ,green "[[:space:]]+$"
+## String
+color white,red "L?\"(\\"|[^"])*\""
+color brightcyan "L?'(\\'|[^'])*'"
+color brightcyan "L?`(\`|[^`])*`"
+color brightyellow "\$\{[^}]*\}"
 
-## Escapes - red
+## Trailing spaces
+color ,red "[[:space:]]+$"
+
+## Escapes
 color red "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
+
+## Comments
+color brightblack start="^[ \t]*/\*" end="\*/"
+color brightblack "//.*$"
