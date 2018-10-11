@@ -2,6 +2,7 @@
 ## New updated taken from http://wiki.linuxhelp.net/index.php/Nano_Syntax_Highlighting
 
 syntax "JavaScript" "\.(js)$"
+linter "eslint --format=unix"
 
 ## Default
 color white "^.+$"
@@ -55,4 +56,4 @@ color red "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
 
 ## Comments
 color brightblack start="^[ \t]*/\*" end="\*/"
-color brightblack "//.*$"
+color brightblack "(^|[[:space:]]+)//.*$"
